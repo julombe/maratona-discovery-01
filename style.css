@@ -119,3 +119,15 @@ table tbody td {
     background: white;
     padding: 1rem 2rem;
 }
+
+td.description {
+    color: var(--dark-blue);
+}
+
+td.income {
+    color: #12a454;
+}
+
+td.expense {
+    color: #e92929;
+}
