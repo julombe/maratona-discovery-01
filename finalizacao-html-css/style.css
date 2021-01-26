@@ -55,6 +55,14 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    color: #3dd705;
+}
+
+.button.new {
+    display: inline-block;
+    margin-bottom: .8rem;
+}
 /*====Header====*/
 
 header {
