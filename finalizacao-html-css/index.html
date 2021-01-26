@@ -104,7 +104,7 @@
     </main>
 
 
-    <div class="modal-overlay active">
+    <div class="modal-overlay">
         <div class="modal">
             <div id="form">
                 <h2>Nova Transação</h2>
@@ -167,6 +167,8 @@
     <script>
         const Modal = {
             open() {
+                // abrir o modal
+                //adicionar a class active ao modal
                 document.querySelector('.modal-overlay').classList.add('active')
             },
 
