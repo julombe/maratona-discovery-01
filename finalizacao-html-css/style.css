@@ -3,6 +3,7 @@
 
 :root {
     --dark-blue: #363f5f;
+    --green: #49aa26;
 }
 * {
     margin: 0;
@@ -51,7 +52,7 @@ h2 {
 
 /*====LInks & BUttons====*/
 a {
-    color: #49aa26;
+    color: var(--green);
     text-decoration: none;
 }
 
@@ -115,7 +116,7 @@ header {
 }
 
 .card.total {
-    background: #49aa26;
+    background: var(--green);
     color: white;
 }
 
