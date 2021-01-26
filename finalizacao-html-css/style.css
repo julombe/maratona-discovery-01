@@ -87,6 +87,20 @@ button:hover {
     display: inline-block;
     margin-bottom: .8rem;
 }
+
+.button.cancel {
+    color: var(--red);
+    border: 2px solid var(--red);
+    border-radius: 0.25rem;
+
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0.6;
+}
 /*====Header====*/
 
 header {
