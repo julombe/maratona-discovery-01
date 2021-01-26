@@ -49,6 +49,12 @@ h2 {
 }
 
 
+/*====LInks & BUttons====*/
+a {
+    color: #49aa26;
+    text-decoration: none;
+}
+
 /*====Header====*/
 
 header {
