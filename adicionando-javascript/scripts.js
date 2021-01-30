@@ -181,5 +181,17 @@ const Form = {
     },
 
 
-    submit(event)
+    submit(event) {
+        event.preventDefault()     // para o form não ter o comportamento padrão
+
+        try {
+            Form.validateFilds()
+            const transaction = Form.formatValues()
+            Transaction.add(transaction)
+            Form.clearFields()
+            Modal.close()
+        }   catch (error) {
+            alert(error.message)
+        }
+    }
 }
