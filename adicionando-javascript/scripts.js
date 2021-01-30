@@ -148,4 +148,38 @@ const Form = {
             date: Form.date.value
         }
     },
+
+    validateFilds() {
+        const { description, amount, date } = Form.getValues()
+
+        if(description.trim() === "" ||
+            amount.trim() === "" ||
+            date.trim() === "") {
+                throw new Error("Por favor, preencha todos os campos")
+            }
+    },
+
+    formatValues() {
+        let { description, amount, date } = Form.getValues()
+
+        amount = Utils.formatAmount(amount)
+
+        date = Utils.formatDate(date)
+
+        return {
+            description,
+            amount,
+            date
+        }
+    },
+
+    clearFields() {
+        Form.description.value = ""
+        Form.amount.value = ""
+        Form.date.value = ""
+
+    },
+
+
+    submit(event)
 }
