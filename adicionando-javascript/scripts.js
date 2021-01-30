@@ -12,16 +12,16 @@ const Modal = {
     }
 }
 
+
 const Storage = {
     get() {
-        return JSON.parse(localStorage.getItem("dev.finances:transactions") || [])
+        return JSON.parse(localStorage.getItem("dev.finances:transactions")) || []
     },
 
     set(transactions) {
         localStorage.setItem("dev.finances:transactions", JSON.stringify(transactions))
     }
 }
-
 
 const Transaction = {
     all: Storage.get(),
@@ -41,7 +41,7 @@ const Transaction = {
     incomes() {
         let income = 0;
         Transaction.all.forEach(transaction => {
-            if( transaction.amount > 0) {
+            if( transaction.amount > 0 ) {
                 income += transaction.amount;
             }
         })
@@ -51,7 +51,7 @@ const Transaction = {
     expenses() {
         let expense = 0;
         Transaction.all.forEach(transaction => {
-            if( transaction.amount < 0) {
+            if( transaction.amount < 0 ) {
                 expense += transaction.amount;
             }
         })
@@ -63,10 +63,8 @@ const Transaction = {
     }
 }
 
-
 const DOM = {
     transactionsContainer: document.querySelector('#data-table tbody'),
-
 
     addTransaction(transaction, index) {
         const tr = document.createElement('tr')
@@ -87,17 +85,22 @@ const DOM = {
         <td class="date">${transaction.date}</td>
         <td>
             <img onclick="Transaction.remove(${index})" src="./assets/minus.svg" alt="Remover transação">
-        </td>   
+        </td>
         `
 
         return html
     },
 
-
     updateBalance() {
-        document.getElementById('incomeDisplay').innerHTML = Utils.formatCurrency(Transaction.incomes())
-        document.getElementById('expenseDisplay').innerHTML = Utils.formatCurrency(Transaction.expenses())
-        document.getElementById('totalDisplay').innerHTML = Utils.formatCurrency(Transaction.total())
+        document
+            .getElementById('incomeDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.incomes())
+        document
+            .getElementById('expenseDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.expenses())
+        document
+            .getElementById('totalDisplay')
+            .innerHTML = Utils.formatCurrency(Transaction.total())
     },
 
     clearTransactions() {
@@ -105,12 +108,10 @@ const DOM = {
     }
 }
 
-
-
 const Utils = {
-    formatAmount(value) {
+    formatAmount(value){
         value = Number(value.replace(/\,\./g, "")) * 100
-
+        
         return value
     },
 
@@ -126,15 +127,14 @@ const Utils = {
 
         value = Number(value) / 100
 
-        value = value.toLocalString("pt-BR", {
+        value = value.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL"
         })
 
-        return signal + value
+       return signal + value
     }
 }
-
 
 const Form = {
     description: document.querySelector('input#description'),
@@ -149,19 +149,19 @@ const Form = {
         }
     },
 
-    validateFilds() {
+    validateFields() {
         const { description, amount, date } = Form.getValues()
-
-        if(description.trim() === "" ||
-            amount.trim() === "" ||
-            date.trim() === "") {
+        
+        if( description.trim() === "" || 
+            amount.trim() === "" || 
+            date.trim() === "" ) {
                 throw new Error("Por favor, preencha todos os campos")
-            }
+        }
     },
 
     formatValues() {
         let { description, amount, date } = Form.getValues()
-
+        
         amount = Utils.formatAmount(amount)
 
         date = Utils.formatDate(date)
@@ -177,36 +177,31 @@ const Form = {
         Form.description.value = ""
         Form.amount.value = ""
         Form.date.value = ""
-
     },
 
-
     submit(event) {
-        event.preventDefault()     // para o form não ter o comportamento padrão
+        event.preventDefault()
 
         try {
-            Form.validateFilds()
+            Form.validateFields()
             const transaction = Form.formatValues()
             Transaction.add(transaction)
             Form.clearFields()
             Modal.close()
-        }   catch (error) {
+        } catch (error) {
             alert(error.message)
         }
     }
 }
 
-
-
 const App = {
     init() {
         Transaction.all.forEach(DOM.addTransaction)
-
+        
         DOM.updateBalance()
 
         Storage.set(Transaction.all)
     },
-
     reload() {
         DOM.clearTransactions()
         App.init()
