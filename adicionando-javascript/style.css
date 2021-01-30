@@ -104,6 +104,8 @@ button:hover {
 
 .button.cancel:hover {
     opacity: 1;
+
+    transition: 0.5s;
 }
 /*====Header====*/
 
